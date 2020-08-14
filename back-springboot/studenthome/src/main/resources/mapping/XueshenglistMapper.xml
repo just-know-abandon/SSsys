@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhj.sql.mapper.XueshenglistMapper">
+  <resultMap id="BaseResultMap" type="com.lhj.sql.model.Xueshenglist">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sushehao" jdbcType="VARCHAR" property="sushehao" />
+    <result column="xuehao" jdbcType="VARCHAR" property="xuehao" />
+    <result column="zhuanye" jdbcType="VARCHAR" property="zhuanye" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, sushehao, xuehao, zhuanye, phone
+  </sql>
+  <select id="selectByExample" parameterType="com.lhj.sql.model.XueshenglistExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `xueshenglist`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.lhj.sql.model.XueshenglistKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `xueshenglist`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lhj.sql.model.XueshenglistKey">
+    delete from `xueshenglist`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhj.sql.model.XueshenglistExample">
+    delete from `xueshenglist`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhj.sql.model.Xueshenglist">
+    insert into `xueshenglist` (id, name, sushehao, 
+      xuehao, zhuanye, phone
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sushehao,jdbcType=VARCHAR}, 
+      #{xuehao,jdbcType=VARCHAR}, #{zhuanye,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhj.sql.model.Xueshenglist">
+    insert into `xueshenglist`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sushehao != null">
+        sushehao,
+      </if>
+      <if test="xuehao != null">
+        xuehao,
+      </if>
+      <if test="zhuanye != null">
+        zhuanye,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sushehao != null">
+        #{sushehao,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null">
+        #{xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanye != null">
+        #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhj.sql.model.XueshenglistExample" resultType="java.lang.Long">
+    select count(*) from `xueshenglist`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `xueshenglist`
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sushehao != null">
+        sushehao = #{record.sushehao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xuehao != null">
+        xuehao = #{record.xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhuanye != null">
+        zhuanye = #{record.zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `xueshenglist`
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      sushehao = #{record.sushehao,jdbcType=VARCHAR},
+      xuehao = #{record.xuehao,jdbcType=VARCHAR},
+      zhuanye = #{record.zhuanye,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhj.sql.model.Xueshenglist">
+    update `xueshenglist`
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sushehao != null">
+        sushehao = #{sushehao,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null">
+        xuehao = #{xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanye != null">
+        zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhj.sql.model.Xueshenglist">
+    update `xueshenglist`
+    set name = #{name,jdbcType=VARCHAR},
+      sushehao = #{sushehao,jdbcType=VARCHAR},
+      xuehao = #{xuehao,jdbcType=VARCHAR},
+      zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
